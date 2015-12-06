@@ -31,7 +31,6 @@ static int touchboost = 1;
 
 static struct mutex managed_cpus_lock;
 
-static int touchboost = 0;
 
 /* Maximum number to clusters that this module will manage*/
 static unsigned int num_clusters;
@@ -408,7 +407,7 @@ static int set_cpu_min_freq(const char *buf, const struct kernel_param *kp)
 	if (touchboost == 0)
 		return 0;
 
-	const char *reset = "0:0 4:0";
+	const char *reset = "0:0 2:0";
 
 	if (touchboost == 0)
 		cp = reset;
