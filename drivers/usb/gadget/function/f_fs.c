@@ -1801,7 +1801,6 @@ static int ffs_func_eps_enable(struct ffs_function *func)
 						__func__, ret, ep->ep->name);
 			break;
 		}
-
 		ret = usb_ep_enable(ep->ep);
 		if (likely(!ret)) {
 			epfile->ep = ep;
