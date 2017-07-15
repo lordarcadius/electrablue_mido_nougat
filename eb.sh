@@ -43,7 +43,7 @@ echo "         Compiling ElectraBlue Kernel             "
 echo -e "***********************************************$nocol"
 make clean && make mrproper
 make mido_defconfig
-make -j8
+make -j4
 if ! [ -a $IMAGE ];
 then
 echo -e "$Red Kernel Compilation failed! Fix the errors! $nocol"
