@@ -200,11 +200,7 @@
 #define unreachable() __builtin_unreachable()
 
 /* Mark a function definition as prohibited from being cloned. */
-<<<<<<< HEAD
 #define __noclone	__attribute__((__noclone__))
-=======
-#define __noclone	__attribute__((__noclone__, __optimize__("no-tracer")))
->>>>>>> v3.18.32
 
 #endif /* GCC_VERSION >= 40500 */
 
@@ -242,7 +238,6 @@
 #define KASAN_ABI_VERSION 3
 #endif
 
-<<<<<<< HEAD
 #if GCC_VERSION >= 40902
 /*
  * Tell the compiler that address safety instrumentation (KASAN)
@@ -252,8 +247,6 @@
 #define __no_sanitize_address __attribute__((no_sanitize_address))
 #endif
 
-=======
->>>>>>> v3.18.32
 #endif	/* gcc version >= 40000 specific checks */
 
 #if !defined(__noclone)
