@@ -32,7 +32,7 @@ export ARCH=arm64
 export SUBARCH=arm64
 export KBUILD_BUILD_USER="LordArcadius"
 export KBUILD_BUILD_HOST="DroidBox"
-export CROSS_COMPILE=/home/lordarcadius/aarch64-linux-android-6.0/bin/aarch64-linux-android-
+export CROSS_COMPILE=/home/lordarcadius/aarch64-linaro-linux-android/bin/aarch64-linaro-linux-android-
 
 # Compilation Scripts Are Below
 
