@@ -28,6 +28,7 @@ obj-$(CONFIG_MSM_BOOT_STATS) += boot_stats.o
 obj-$(CONFIG_MSM_BOOT_TIME_MARKER) += boot_marker.o
 obj-$(CONFIG_MSM_HYP_DEBUG) += hyp-debug.o
 obj-$(CONFIG_ARCH_MSM8996) += kryo-l2-accessors.o
+obj-$(CONFIG_ASMP)         += autosmp.o
 obj-$(CONFIG_MSM_RPM_SMD) +=	rpm-smd.o
 obj-$(CONFIG_MSM_EVENT_TIMER) += event_timer.o
 ifdef CONFIG_DEBUG_FS
