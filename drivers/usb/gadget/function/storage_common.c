@@ -498,8 +498,8 @@ EXPORT_SYMBOL_GPL(fsg_store_file);
 ssize_t fsg_store_cdrom(struct fsg_lun *curlun, struct rw_semaphore *filesem,
 			const char *buf, size_t count)
 {
-	bool		cdrom;
-	int		ret;
+	int		cdrom;
+	ssize_t		ret;
 
 	ret = strtobool(buf, &cdrom);
 	if (ret)
