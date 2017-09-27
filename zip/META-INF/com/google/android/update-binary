@@ -44,7 +44,7 @@ bb=/tmp/anykernel/tools/busybox;
 
 ui_print "$(file_getprop /tmp/anykernel/anykernel.sh kernel.string)";
 ui_print " ";
-ui_print "ElectraBlue Kernel For REdmi Note 4";
+ui_print "ElectraBlue Kernel For Redmi Note 4";
 ui_print " ";
 umount /system;
 mount -o ro -t auto /system;
