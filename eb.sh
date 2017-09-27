@@ -41,7 +41,7 @@ compile_kernel ()
 echo -e "$White***********************************************"
 echo "         Compiling ElectraBlue Kernel             "
 echo -e "***********************************************$nocol"
-make clean && make mrproper
+#make clean && make mrproper
 make mido_defconfig
 make -j4
 if ! [ -a $IMAGE ];
