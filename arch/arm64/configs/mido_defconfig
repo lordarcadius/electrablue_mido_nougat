@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm64 3.18.79 Kernel Configuration
+# Linux/arm64 3.18.83 Kernel Configuration
 #
 
 #electrablue
@@ -28,6 +28,7 @@ CONFIG_CPU_FREQ_GOV_ELECTRON=y
 CONFIG_CPU_FREQ_GOV_CHILL=y
 CONFIG_FRANDOM=y
 CONFIG_QNS_SYSTEM=y
+CONFIG_BOEFFLA_WL_BLOCKER=y
 
 #
 CONFIG_ARM64=y
