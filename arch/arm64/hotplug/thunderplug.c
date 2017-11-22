@@ -544,12 +544,12 @@ static ssize_t __ref thunderplug_hp_style_store(struct kobject *kobj, struct kob
 
 static struct kobj_attribute thunderplug_hp_style_attribute =
        __ATTR(hotplug_style,
-               0666,
+               0664,
                thunderplug_hp_style_show, thunderplug_hp_style_store);
 
 static struct kobj_attribute thunderplug_mode_attribute =
        __ATTR(sched_mode,
-               0666,
+               0664,
                thunderplug_sched_mode_show, thunderplug_sched_mode_store);
 
 #else
@@ -600,27 +600,27 @@ static struct kobj_attribute thunderplug_ver_attribute =
 
 static struct kobj_attribute thunderplug_suspend_cpus_attribute =
        __ATTR(suspend_cpus,
-               0666,
+               0664,
                thunderplug_suspend_cpus_show, thunderplug_suspend_cpus_store);
 
 static struct kobj_attribute thunderplug_endurance_attribute =
        __ATTR(endurance_level,
-               0666,
+               0664,
                thunderplug_endurance_show, thunderplug_endurance_store);
 
 static struct kobj_attribute thunderplug_sampling_attribute =
        __ATTR(sampling_rate,
-               0666,
+               0664,
                thunderplug_sampling_show, thunderplug_sampling_store);
 
 static struct kobj_attribute thunderplug_load_attribute =
        __ATTR(load_threshold,
-               0666,
+               0664,
                thunderplug_load_show, thunderplug_load_store);
 
 static struct kobj_attribute thunderplug_tb_enabled_attribute =
        __ATTR(touch_boost,
-               0666,
+               0664,
                thunderplug_tb_enabled_show, thunderplug_tb_enabled_store);
 
 static struct attribute *thunderplug_attrs[] =
