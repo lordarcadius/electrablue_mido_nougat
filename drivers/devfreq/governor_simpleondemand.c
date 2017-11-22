@@ -52,7 +52,7 @@ static int devfreq_simple_ondemand_func(struct devfreq *df,
 	}
 
 	if (!is_display_on()) {
-		*freq = 133000000;
+		*freq = df->min_freq;
 		return 0;
 	}
 
