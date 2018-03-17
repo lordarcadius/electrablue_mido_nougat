@@ -41,10 +41,6 @@
 #include <linux/ktime.h>
 #include "pmic-voter.h"
 
-#ifdef CONFIG_FORCE_FAST_CHARGE
-#include <linux/fastchg.h>
-#endif
-
 /* Mask/Bit helpers */
 #define _SMB_MASK(BITS, POS) \
 	((unsigned char)(((1 << (BITS)) - 1) << (POS)))
@@ -492,8 +488,21 @@ module_param_named(
 	int, S_IRUSR | S_IWUSR
 );
 
-#define pr_smb(reason, fmt, ...)
-#define pr_smb_rt(reason, fmt, ...)
+#define pr_smb(reason, fmt, ...)				\
+	do {							\
+		if (smbchg_debug_mask & (reason))		\
+			pr_info(fmt, ##__VA_ARGS__);		\
+		else						\
+			pr_debug(fmt, ##__VA_ARGS__);		\
+	} while (0)
+
+#define pr_smb_rt(reason, fmt, ...)					\
+	do {								\
+		if (smbchg_debug_mask & (reason))			\
+			pr_info_ratelimited(fmt, ##__VA_ARGS__);	\
+		else							\
+			pr_debug_ratelimited(fmt, ##__VA_ARGS__);	\
+	} while (0)
 
 static int smbchg_read(struct smbchg_chip *chip, u8 *val,
 			u16 addr, int count)
@@ -1802,11 +1811,7 @@ static int smbchg_set_usb_current_max(struct smbchg_chip *chip,
 			}
 			chip->usb_max_current_ma = 500;
 		}
-#ifdef CONFIG_FORCE_FAST_CHARGE
-		if ((force_fast_charge > 0 && current_ma == CURRENT_500_MA) || current_ma == CURRENT_900_MA) {
-#else
 		if (current_ma == CURRENT_900_MA) {
-#endif
 			rc = smbchg_sec_masked_write(chip,
 					chip->usb_chgpth_base + CHGPTH_CFG,
 					CFG_USB_2_3_SEL_BIT, CFG_USB_3);
@@ -4724,10 +4729,8 @@ static int smbchg_restricted_charging(struct smbchg_chip *chip, bool enable)
 
 	return rc;
 }
-
 extern void ist30xx_set_ta_mode(bool mode);
 extern void tpd_usb_plugin(bool mode);
-extern void gtp_usb_plugin(bool mode);
 int set_usb_charge_mode_par = 0;
 static void handle_usb_removal(struct smbchg_chip *chip)
 {
@@ -4738,9 +4741,8 @@ static void handle_usb_removal(struct smbchg_chip *chip)
 		ist30xx_set_ta_mode(0);
 	} else if (set_usb_charge_mode_par == 2) {
 		tpd_usb_plugin(0);
-	} else if (set_usb_charge_mode_par == 3) {
-		gtp_usb_plugin(0);
 	}
+printk("set_usb_charge_mode_par off = %d\n", set_usb_charge_mode_par);
 	pr_smb(PR_STATUS, "triggered\n");
 	smbchg_aicl_deglitch_wa_check(chip);
 	/* Clear the OV detected status set before */
@@ -4811,13 +4813,10 @@ static void handle_usb_insertion(struct smbchg_chip *chip)
 	enum power_supply_type usb_supply_type;
 	int rc;
 	char *usb_type_name = "null";
-
 	if (set_usb_charge_mode_par == 1) {
 		ist30xx_set_ta_mode(1);
 	} else if (set_usb_charge_mode_par == 2) {
 		tpd_usb_plugin(1);
-	} else if (set_usb_charge_mode_par == 3) {
-		gtp_usb_plugin(1);
 	}
 	pr_smb(PR_STATUS, "triggered\n");
 	/* usb inserted */
@@ -8545,3 +8544,4 @@ module_exit(smbchg_exit);
 MODULE_DESCRIPTION("QPNP SMB Charger");
 MODULE_LICENSE("GPL v2");
 MODULE_ALIAS("platform:qpnp-smbcharger");
+
