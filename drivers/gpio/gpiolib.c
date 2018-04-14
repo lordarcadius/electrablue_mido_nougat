@@ -67,7 +67,7 @@ struct gpio_desc *gpio_to_desc(unsigned gpio)
 {
 	if (WARN(!gpio_is_valid(gpio), "invalid GPIO %d\n", gpio))
 		return NULL;
-	} else
+	else
 		return &gpio_desc[gpio];
 }
 EXPORT_SYMBOL_GPL(gpio_to_desc);
